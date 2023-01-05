@@ -1,41 +1,30 @@
-To deploy the cluster using the configuration file, you will need to run the following commands:
-
+Deploying the Cluster using the Configuration File
 Initialize the Terraform working directory:
-
+```bash
 terraform init
-
-
 Review the proposed changes:
-
+```bash
 terraform plan
-
-
 Deploy the cluster:
-
+```bash
 terraform apply
-
-
-This will create the EKS cluster and all of the necessary resources defined in the configuration file.
-
 Note: The terraform apply command will prompt you to confirm the changes before they are applied. To bypass this confirmation, you can use the -auto-approve flag.
 
-Once the cluster has been deployed,
-
-
-Run the following command to retrieve the access credentials for your cluster and configure kubectl.
-
- aws eks --region $(terraform output -raw region) update-kubeconfig \
+Retrieve the access credentials for your cluster and configure kubectl:
+```bash
+aws eks --region $(terraform output -raw region) update-kubeconfig \
     --name $(terraform output -raw cluster_name)
-    
-    
-    Verify the Cluster
-Use kubectl commands to verify your cluster configuration.
+Verify the cluster:
+Use kubectl commands to verify your cluster configuration. First, get information about the cluster:
 
-First, get information about the cluster.
+```bash
+kubectl cluster-info
+Clean up your workspace:
+Destroy any resources you create when you are done with this tutorial. Run:
 
- kubectl cluster-info
- 
- 
- 
- Clean up your workspace
- Destroy any resources you create when you are done with this tutorial. Run terraform destroy and confirm with yes in your terminal.
+```bash
+terraform destroy
+and confirm with yes in your terminal.
+
+
+
